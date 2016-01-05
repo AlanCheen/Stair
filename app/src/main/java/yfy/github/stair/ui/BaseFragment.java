@@ -45,7 +45,7 @@ public abstract class BaseFragment extends Fragment {
         init(savedInstanceState);
     }
 
-    protected abstract void init(Bundle savedInstanceState);
+    protected abstract void init(@Nullable Bundle savedInstanceState);
 
     public void onResume() {
         super.onResume();

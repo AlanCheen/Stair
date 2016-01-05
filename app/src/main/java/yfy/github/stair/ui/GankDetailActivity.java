@@ -28,13 +28,12 @@ import yfy.github.stair.data.GankEntity;
 
 public class GankDetailActivity extends ToolbarActivity {
 
-
+    private static final String TAG = "GankDetailActivity";
     public static final String KEY_DETAIL = "key_gank_detail";
     @Bind(R.id.fab)
     FloatingActionButton mFab;
     @Bind(R.id.iv_meizi)
     KenBurnsView mIvMeizi;
-//            ImageView mIvMeizi;
 
     public static Intent creatIntent(Context context, GankEntity gank) {
         Intent intent = new Intent(context, GankDetailActivity.class);

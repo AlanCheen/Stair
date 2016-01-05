@@ -1,5 +1,6 @@
 package yfy.github.stair.ui;
 
+import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.Toolbar;
 
@@ -17,6 +18,7 @@ import yfy.github.stair.R;
  */
 public abstract class ToolbarActivity extends BaseActivity {
 
+    @Nullable
     @Bind(R.id.collapsing_toolbar)
     CollapsingToolbarLayout mCollapsingToolbar;
     @Bind(R.id.toolbar)

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.webkit.WebView;
 
 import butterknife.Bind;
@@ -17,6 +18,7 @@ public class WebActivity extends ToolbarActivity {
     Toolbar mToolbar;
     @Bind(R.id.webview)
     WebView mWebview;
+    private String mUrl;
 
     public static Intent creatIntent(Context context, String url) {
         Intent intent = new Intent(context, WebActivity.class);
@@ -31,7 +33,12 @@ public class WebActivity extends ToolbarActivity {
 
     @Override
     protected void init(Bundle savedInstanceState) {
-        String url = getIntent().getStringExtra(KEY_URL);
-        mWebview.loadUrl(url);
+        mUrl = getIntent().getStringExtra(KEY_URL);
+        mWebview.loadUrl(mUrl);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        return super.onCreateOptionsMenu(menu);
     }
 }
