@@ -4,6 +4,8 @@ package yfy.github.stair.data;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
@@ -133,9 +135,19 @@ public class MeiziFragment extends BaseFragment {
             }
         });
 
-        mAdapter.setOnItemClickListener(entity -> {
-            Intent intent = GankDetailActivity.creatIntent(mActivity, entity);
-            startActivity(intent);
+        mAdapter.setOnItemClickListener(new GankMeiziAdapter.onItemClickListener() {
+            @Override
+            public void onItemClick(GankMeiziAdapter.GankViewHolder holder, GankEntity entity) {
+
+                ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(mActivity, holder.getIvMeizi(), getString(R.string.meizi_transition_name));
+
+
+                Intent intent = GankDetailActivity.creatIntent(mActivity, entity);
+
+//                MeiziFragment.this.startActivity(intent);
+
+                ActivityCompat.startActivity(mActivity, intent,options.toBundle());
+            }
         });
 
     }

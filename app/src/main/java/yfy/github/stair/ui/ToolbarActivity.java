@@ -20,9 +20,9 @@ public abstract class ToolbarActivity extends BaseActivity {
 
     @Nullable
     @Bind(R.id.collapsing_toolbar)
-    CollapsingToolbarLayout mCollapsingToolbar;
+    protected CollapsingToolbarLayout mCollapsingToolbar;
     @Bind(R.id.toolbar)
-    Toolbar mToolbar;
+    protected Toolbar mToolbar;
 
     @Override
     public void setContentView(int layoutResID) {

@@ -8,5 +8,12 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_gank_detail">GankDetailActivity</string>
+    <string name="title_activity_gank_detail">Detail</string>
+
+
+
+    <string name="meizi_transition_name" translatable="false">meizi_transition</string>
+
+
+
 </resources>

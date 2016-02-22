@@ -39,7 +39,7 @@ public class GankMeiziAdapter extends RecyclerView.Adapter<GankMeiziAdapter.Gank
     }
 
     @Override
-    public void onBindViewHolder(GankViewHolder holder, int position) {
+    public void onBindViewHolder(final GankViewHolder holder, int position) {
 
         GankEntity entity = mDatas.get(position);
 
@@ -54,7 +54,7 @@ public class GankMeiziAdapter extends RecyclerView.Adapter<GankMeiziAdapter.Gank
 
         holder.itemView.setOnClickListener(v -> {
             if (null != mOnItemClickListener) {
-                mOnItemClickListener.onItemCliek(entity);
+                mOnItemClickListener.onItemClick(holder,entity);
             }
         });
     }
@@ -72,6 +72,10 @@ public class GankMeiziAdapter extends RecyclerView.Adapter<GankMeiziAdapter.Gank
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
+
+        public ImageView getIvMeizi() {
+            return ivMeizi;
+        }
     }
 
     public void setOnItemClickListener(onItemClickListener onItemClickListener) {
@@ -81,7 +85,7 @@ public class GankMeiziAdapter extends RecyclerView.Adapter<GankMeiziAdapter.Gank
     private onItemClickListener mOnItemClickListener;
 
     public interface onItemClickListener {
-        void onItemCliek(GankEntity entity);
+        void onItemClick(GankViewHolder holder,GankEntity entity);
     }
 
 }

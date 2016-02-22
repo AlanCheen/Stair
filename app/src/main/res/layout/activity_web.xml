@@ -21,18 +21,21 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.v4.widget.ContentLoadingProgressBar
-            android:id="@+id/progress"
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:progress="40"
-            />
-
-        <WebView
+        <yfy.github.stair.views.SmartWebView
             android:id="@+id/webview"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-        </WebView>
+        </yfy.github.stair.views.SmartWebView>
+
+        <ProgressBar
+            android:id="@+id/progress"
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:progress="0"
+            android:max="100"
+            android:background="@drawable/progress"
+            style="?android:attr/progressBarStyleHorizontal"
+            />
     </FrameLayout>
 
 </LinearLayout>
