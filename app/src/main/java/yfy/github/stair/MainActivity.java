@@ -11,8 +11,11 @@ import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -35,11 +38,6 @@ public class MainActivity extends ToolbarActivity implements NavigationView.OnNa
 
     protected static final String TAG = "MainActivity";
 
-    //    @Bind(R.id.toolbar)
-//    Toolbar mToolbar;
-
-//    @Bind(R.id.fab)
-//    FloatingActionButton mFab;
     @Bind(R.id.nav_view)
     NavigationView mNavView;
     @Bind(R.id.drawer_layout)
@@ -65,11 +63,9 @@ public class MainActivity extends ToolbarActivity implements NavigationView.OnNa
     @Override
     protected void init(Bundle savedInstanceState) {
 
-//        setSupportActionBar(mToolbar);
-
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, mDrawerLayout, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        mDrawerLayout.setDrawerListener(toggle);
+        mDrawerLayout.addDrawerListener(toggle);
         toggle.syncState();
         mNavView.setNavigationItemSelectedListener(this);
 
@@ -78,13 +74,17 @@ public class MainActivity extends ToolbarActivity implements NavigationView.OnNa
         }
 
 
-//        ViewCompat.animate(mFab)
-//                .setStartDelay(50)
-//                .setDuration(400)
-//                .scaleY(1)
-//                .scaleX(1)
-//                .start();
+        initBadge();
+    }
 
+
+    private TextView mTvBadge;
+    private void initBadge() {
+
+//        MenuItemCompat.getActionView(mNavView.getMenu().findItem())
+        View news = mNavView.getMenu().findItem(R.id.news).getActionView();
+        mTvBadge = (TextView) news.findViewById(R.id.tv_badge);
+        mTvBadge.setText("99+");
     }
 
     @IntDef({PAGE_GANK_ANDROID, PAGE_IMPORT_NEW, PAGE_GANK_DAILY, PAGE_GANK_MEIZI})
@@ -179,6 +179,8 @@ public class MainActivity extends ToolbarActivity implements NavigationView.OnNa
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
+
+        Log.d(TAG, "onCreateOptionsMenu() called with: " + "menu = [" + menu + "]");
         getMenuInflater().inflate(R.menu.main, menu);
         setupSearchItem(menu);
         return true;
@@ -230,7 +232,7 @@ public class MainActivity extends ToolbarActivity implements NavigationView.OnNa
             pageDst = PAGE_GANK_MEIZI;
         } else if (id == R.id.nav_share) {
 
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.setting) {
 
         }
         changePage(pageDst);
