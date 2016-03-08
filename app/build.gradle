@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.1"
+    buildToolsVersion "23.0.2"
     defaultConfig {
         applicationId "yfy.github.stair"
         minSdkVersion 19
@@ -48,7 +48,7 @@ apply plugin: 'me.tatarka.retrolambda'
 
 
 ext{
-    supportVersion = '23.1.1'
+    supportVersion = '23.2.0'
     okHttpVersion = '2.6.0'
     retrofitVersion = '2.0.0-beta2'
 }
