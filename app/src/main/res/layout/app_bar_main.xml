@@ -34,4 +34,13 @@
         <!--android:transitionName="reveal"-->
         <!--/>-->
 
+    <!--<View-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="300dp"-->
+        <!--android:background="#440044"-->
+        <!--app:layout_behavior="android.support.design.widget.BottomSheetBehavior"-->
+        <!--app:behavior_peekHeight="100dp"-->
+        <!--app:behavior_hideable ="true"-->
+        <!--/>-->
+
 </android.support.design.widget.CoordinatorLayout>

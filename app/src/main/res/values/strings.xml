@@ -11,9 +11,8 @@
     <string name="title_activity_gank_detail">Detail</string>
 
 
-
     <string name="meizi_transition_name" translatable="false">meizi_transition</string>
-
+    <string name="title_activity_photo">PhotoActivity</string>
 
 
 </resources>

@@ -13,16 +13,10 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name"
-            >
+            android:label="@string/app_name">
         </activity>
-
-
-
         <activity android:name=".ui.BaseActivity"/>
         <activity android:name=".ui.ToolbarActivity"/>
         <activity
@@ -30,24 +24,19 @@
             android:label="@string/title_activity_gank_detail"
             android:theme="@style/AppTheme.Detail">
         </activity>
-
         <activity
             android:name=".ui.SplashActivity"
-            android:theme="@style/SplashTheme"
-            >
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
+
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-
-
-
-        <activity android:name=".ui.WebActivity" android:process=":worker">
-
-
+        <activity
+            android:name=".ui.WebActivity"
+            android:process=":worker">
         </activity>
-
 
         <meta-data
             android:name="UMENG_APPKEY"
@@ -55,6 +44,12 @@
         <meta-data
             android:name="UMENG_CHANNEL"
             android:value="${UMENG_CHANNEL}"/>
+
+        <activity
+            android:name=".ui.PhotoActivity"
+            android:label="@string/title_activity_photo"
+            android:theme="@style/AppTheme">
+        </activity>
     </application>
 
 </manifest>

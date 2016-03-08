@@ -11,6 +11,8 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,6 +66,7 @@ public class MeiziFragment extends BaseFragment {
         mDatas = new ArrayList<>();
         mAdapter = new GankMeiziAdapter(mActivity, mDatas);
 
+        setHasOptionsMenu(true);
         setupRv();
         requestData();
     }
@@ -113,7 +116,7 @@ public class MeiziFragment extends BaseFragment {
         });
 
 //        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
-        GridLayoutManager layoutManager = new GridLayoutManager(mActivity,2);
+        GridLayoutManager layoutManager = new GridLayoutManager(mActivity,1);
 
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(layoutManager);
@@ -152,4 +155,11 @@ public class MeiziFragment extends BaseFragment {
 
     }
 
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        Log.d(TAG, "onCreateOptionsMenu() called with: " + "menu = [" + menu + "], inflater = [" + inflater + "]");
+//        super.onCreateOptionsMenu(menu, inflater);
+
+    }
 }

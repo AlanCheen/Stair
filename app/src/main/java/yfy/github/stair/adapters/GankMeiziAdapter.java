@@ -35,6 +35,7 @@ public class GankMeiziAdapter extends RecyclerView.Adapter<GankMeiziAdapter.Gank
     public GankViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(mContext).inflate(R.layout.item_gank_meizi, parent, false);
+
         return new GankViewHolder(view);
     }
 
