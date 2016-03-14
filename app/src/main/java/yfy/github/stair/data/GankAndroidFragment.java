@@ -140,5 +140,8 @@ public class GankAndroidFragment extends BaseFragment {
             startActivity(intent);
         });
 
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(mActivity, DividerItemDecoration.VERTICAL_LIST);
+        mRecyclerView.addItemDecoration(dividerItemDecoration);
+
     }
 }

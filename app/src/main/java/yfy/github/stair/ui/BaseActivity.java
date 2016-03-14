@@ -32,8 +32,11 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(provideLayoutId());
-        ButterKnife.bind(this);
+        int layoutId = provideLayoutId();
+        if (layoutId > 0) {
+            setContentView(provideLayoutId());
+            ButterKnife.bind(this);
+        }
         mContext = this;
         init(savedInstanceState);
     }

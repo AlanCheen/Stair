@@ -12,7 +12,22 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+
+    <style name="AppTheme.Detail">
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowEnterTransition">@transition/ts_detail</item>
+        <item name="android:windowAllowEnterTransitionOverlap">false</item>
+    </style>
+
+
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+
+
+    <style name="SplashTheme" parent="BaseTheme">
+        <item name="android:windowBackground">@drawable/splash</item>
+    </style>
+
+
 </resources>

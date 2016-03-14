@@ -4,11 +4,15 @@ package yfy.github.stair.data;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,6 +66,7 @@ public class MeiziFragment extends BaseFragment {
         mDatas = new ArrayList<>();
         mAdapter = new GankMeiziAdapter(mActivity, mDatas);
 
+        setHasOptionsMenu(true);
         setupRv();
         requestData();
     }
@@ -111,7 +116,7 @@ public class MeiziFragment extends BaseFragment {
         });
 
 //        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
-        GridLayoutManager layoutManager = new GridLayoutManager(mActivity,2);
+        GridLayoutManager layoutManager = new GridLayoutManager(mActivity,1);
 
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(layoutManager);
@@ -133,11 +138,28 @@ public class MeiziFragment extends BaseFragment {
             }
         });
 
-        mAdapter.setOnItemClickListener(entity -> {
-            Intent intent = GankDetailActivity.creatIntent(mActivity, entity);
-            startActivity(intent);
+        mAdapter.setOnItemClickListener(new GankMeiziAdapter.onItemClickListener() {
+            @Override
+            public void onItemClick(GankMeiziAdapter.GankViewHolder holder, GankEntity entity) {
+
+                ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(mActivity, holder.getIvMeizi(), getString(R.string.meizi_transition_name));
+
+
+                Intent intent = GankDetailActivity.creatIntent(mActivity, entity);
+
+//                MeiziFragment.this.startActivity(intent);
+
+                ActivityCompat.startActivity(mActivity, intent,options.toBundle());
+            }
         });
 
     }
 
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        Log.d(TAG, "onCreateOptionsMenu() called with: " + "menu = [" + menu + "], inflater = [" + inflater + "]");
+//        super.onCreateOptionsMenu(menu, inflater);
+
+    }
 }

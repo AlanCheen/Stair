@@ -2,10 +2,11 @@
 
     <style name="AppTheme" parent="BaseTheme">
         <!-- Customize your theme here. -->
+        <!--<item name="android:listDivider">@drawable/divider</item>-->
     </style>
 
     <!-- Base application theme. -->
-    <style name="BaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="BaseTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -13,13 +14,18 @@
     </style>
 
 
-    <style name="AppTheme.NoActionBar">
+    <style name="AppTheme.NoActionBar" >
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
 
+
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+
+    <style name="SplashTheme" parent="BaseTheme">
+        <item name="android:windowBackground">@drawable/splash</item>
+    </style>
 
 </resources>

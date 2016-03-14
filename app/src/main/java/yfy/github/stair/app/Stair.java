@@ -1,4 +1,4 @@
-package yfy.github.stair;
+package yfy.github.stair.app;
 
 import android.app.Activity;
 import android.app.Application;

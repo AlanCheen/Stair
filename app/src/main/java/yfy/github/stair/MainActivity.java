@@ -1,19 +1,21 @@
 package yfy.github.stair;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IntDef;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.SearchView;
-import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -23,8 +25,8 @@ import yfy.github.stair.data.GankAndroidFragment;
 import yfy.github.stair.data.GankDailyFragment;
 import yfy.github.stair.data.ImportNewFragment;
 import yfy.github.stair.data.MeiziFragment;
-import yfy.github.stair.ui.BaseActivity;
 import yfy.github.stair.ui.BaseFragment;
+import yfy.github.stair.ui.ToolbarActivity;
 
 
 /**
@@ -32,14 +34,10 @@ import yfy.github.stair.ui.BaseFragment;
  * Created by 程序亦非猿 (http://weibo.com/alancheeen)
  * on 15/10/8
  */
-public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends ToolbarActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     protected static final String TAG = "MainActivity";
 
-    @Bind(R.id.toolbar)
-    Toolbar mToolbar;
-    @Bind(R.id.fab)
-    FloatingActionButton mFab;
     @Bind(R.id.nav_view)
     NavigationView mNavView;
     @Bind(R.id.drawer_layout)
@@ -51,6 +49,12 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private BaseFragment mGankMeiziFragment;
     private int mCurrPage;
 
+
+    public static Intent starter(Context context) {
+        Intent intent = new Intent(context, MainActivity.class);
+        return intent;
+    }
+
     @Override
     protected int provideLayoutId() {
         return R.layout.activity_main;
@@ -59,22 +63,34 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     @Override
     protected void init(Bundle savedInstanceState) {
 
-        setSupportActionBar(mToolbar);
-
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, mDrawerLayout, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        mDrawerLayout.setDrawerListener(toggle);
+        mDrawerLayout.addDrawerListener(toggle);
         toggle.syncState();
         mNavView.setNavigationItemSelectedListener(this);
 
         if (null == savedInstanceState) {
             changePage(PAGE_GANK_ANDROID);
         }
+
+
+        initBadge();
     }
 
-    @IntDef({PAGE_GANK_ANDROID,PAGE_IMPORT_NEW,PAGE_GANK_DAILY,PAGE_GANK_MEIZI})
+
+    private TextView mTvBadge;
+    private void initBadge() {
+
+//        MenuItemCompat.getActionView(mNavView.getMenu().findItem())
+        View news = mNavView.getMenu().findItem(R.id.news).getActionView();
+        mTvBadge = (TextView) news.findViewById(R.id.tv_badge);
+        mTvBadge.setText("99+");
+    }
+
+    @IntDef({PAGE_GANK_ANDROID, PAGE_IMPORT_NEW, PAGE_GANK_DAILY, PAGE_GANK_MEIZI})
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Page{}
+    public @interface Page {
+    }
 
     public static final int PAGE_GANK_ANDROID = 1;
     public static final int PAGE_IMPORT_NEW = 2;
@@ -92,34 +108,34 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
         switch (page) {
             case PAGE_GANK_ANDROID:
-                if (null==mGankAndroidFragment){
+                if (null == mGankAndroidFragment) {
                     mGankAndroidFragment = GankAndroidFragment.newInstance();
                     ts.add(R.id.main_container, mGankAndroidFragment, GankAndroidFragment.TAG);
-                }else {
+                } else {
                     ts.show(mGankAndroidFragment);
                 }
                 break;
             case PAGE_IMPORT_NEW:
-                if (null==mImportNewFragment){
+                if (null == mImportNewFragment) {
                     mImportNewFragment = ImportNewFragment.newInstance();
                     ts.add(R.id.main_container, mImportNewFragment, GankAndroidFragment.TAG);
-                }else {
+                } else {
                     ts.show(mImportNewFragment);
                 }
                 break;
             case PAGE_GANK_DAILY:
-                if (null==mGankDailyFragment){
+                if (null == mGankDailyFragment) {
                     mGankDailyFragment = GankDailyFragment.newInstance();
                     ts.add(R.id.main_container, mGankDailyFragment, GankAndroidFragment.TAG);
-                }else {
+                } else {
                     ts.show(mGankDailyFragment);
                 }
                 break;
             case PAGE_GANK_MEIZI:
-                if (null==mGankMeiziFragment){
+                if (null == mGankMeiziFragment) {
                     mGankMeiziFragment = MeiziFragment.newInstance();
                     ts.add(R.id.main_container, mGankMeiziFragment, GankAndroidFragment.TAG);
-                }else {
+                } else {
                     ts.show(mGankMeiziFragment);
                 }
                 break;
@@ -156,10 +172,16 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
 
+        Log.d(TAG, "onCreateOptionsMenu() called with: " + "menu = [" + menu + "]");
+        getMenuInflater().inflate(R.menu.main, menu);
         setupSearchItem(menu);
         return true;
     }
@@ -172,7 +194,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                Snackbar.make(mFab, query, Snackbar.LENGTH_SHORT).show();
+//                Snackbar.make(mFab, query, Snackbar.LENGTH_SHORT).show();
                 return false;
             }
 
@@ -195,7 +217,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
 
         int pageDst = PAGE_GANK_ANDROID;
 
@@ -211,7 +232,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             pageDst = PAGE_GANK_MEIZI;
         } else if (id == R.id.nav_share) {
 
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.setting) {
 
         }
         changePage(pageDst);
