@@ -9,7 +9,7 @@ android {
         minSdkVersion 19
         targetSdkVersion 23
         versionCode 5
-        versionName "1.0.0"
+        versionName "1.0.1"
     }
 
 
@@ -72,20 +72,25 @@ dependencies {
     compile rootProject.ext.glide
 
     compile rootProject.ext.butterknife
+    compile rootProject.ext.okhttp
+    compile rootProject.ext.logginginterceptor
+    compile rootProject.ext.retrofit
+    compile rootProject.ext.gsonconverter
+    compile rootProject.ext.rxjavaadapter
 
     compile rootProject.ext.circleimageview
     compile rootProject.ext.kenburnsview
     compile rootProject.ext.photoview
 
-    compile "com.squareup.okhttp:okhttp:${okHttpVersion}"
-    compile "com.squareup.okhttp:logging-interceptor:${okHttpVersion}"
+//    compile "com.squareup.okhttp:okhttp:${okHttpVersion}"
+//    compile "com.squareup.okhttp:logging-interceptor:${okHttpVersion}"
 
+//    compile ("com.squareup.retrofit:retrofit:${retrofitVersion}"){
+//        exclude module: 'okhttp'
+//    }
+//    compile "com.squareup.retrofit:converter-gson:${retrofitVersion}"
+//    compile "com.squareup.retrofit:adapter-rxjava:${retrofitVersion}"
 
-    compile ("com.squareup.retrofit:retrofit:${retrofitVersion}"){
-        exclude module: 'okhttp'
-    }
-    compile "com.squareup.retrofit:converter-gson:${retrofitVersion}"
-    compile "com.squareup.retrofit:adapter-rxjava:${retrofitVersion}"
 //    compile "com.squareup.retrofit:converter-jackson:${retrofitVersion}"
 
 
