@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 
+//apply from : '../config.properties'
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.2"
@@ -55,20 +56,26 @@ ext{
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
-    compile "com.android.support:appcompat-v7:${supportVersion}"
-    compile "com.android.support:design:${supportVersion}"
-    compile "com.android.support:recyclerview-v7:${supportVersion}"
-    compile "com.android.support:cardview-v7:${supportVersion}"
 
-    compile 'de.hdodenhof:circleimageview:1.3.0'
-    compile 'com.flaviofaria:kenburnsview:1.0.5'
 
-    compile 'de.greenrobot:eventbus:2.4.0'
+    compile rootProject.ext.appcompact
+    compile rootProject.ext.design
+    compile rootProject.ext.recyclerview
+    compile rootProject.ext.cardview
 
-    compile 'io.reactivex:rxjava:1.0.16'
-    compile 'io.reactivex:rxandroid:1.0.1'
-    compile 'com.jakewharton.rxbinding:rxbinding:0.2.0'
+    compile rootProject.ext.eventbus
 
+    compile rootProject.ext.rxjava
+    compile rootProject.ext.rxandroid
+    compile rootProject.ext.rxbinding
+
+    compile rootProject.ext.glide
+
+    compile rootProject.ext.butterknife
+
+    compile rootProject.ext.circleimageview
+    compile rootProject.ext.kenburnsview
+    compile rootProject.ext.photoview
 
     compile "com.squareup.okhttp:okhttp:${okHttpVersion}"
     compile "com.squareup.okhttp:logging-interceptor:${okHttpVersion}"
@@ -81,10 +88,6 @@ dependencies {
     compile "com.squareup.retrofit:adapter-rxjava:${retrofitVersion}"
 //    compile "com.squareup.retrofit:converter-jackson:${retrofitVersion}"
 
-    compile 'com.jakewharton:butterknife:7.0.1'
-
-    compile 'com.github.chrisbanes.photoview:library:1.2.3'
-    compile 'com.github.bumptech.glide:glide:3.6.1'
 
     compile 'com.umeng.analytics:analytics:latest.integration'
 
