@@ -24,6 +24,13 @@
 -keepattributes Exceptions
 
 
+#=======retrofit2=============
+-dontwarn retrofit2.**
+-keep class retrofit2.** { *; }
+-keepattributes Signature
+-keepattributes Exceptions
+
+
 #=======butterknife=============
 -keep class butterknife.** { *; }
 -dontwarn butterknife.internal.**
@@ -36,7 +43,6 @@
 -keepclasseswithmembernames class * {
     @butterknife.* <methods>;
 }
-
 
 -keepclassmembers class * {
    public <init>(org.json.JSONObject);
