@@ -2,13 +2,19 @@ package yfy.github.stair.api;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.logging.HttpLoggingInterceptor;
 
-import retrofit.GsonConverterFactory;
-import retrofit.Retrofit;
-import retrofit.RxJavaCallAdapterFactory;
+import java.util.concurrent.TimeUnit;
+
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
+import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
+import rx.Observable;
+import rx.schedulers.Schedulers;
 import yfy.github.stair.BuildConfig;
+import yfy.github.stair.data.GAndroid;
+import yfy.github.stair.data.GankDaily;
 
 /**
  * Stair github:  https://github.com/AlanCheen/Stair
@@ -34,37 +40,53 @@ public class GankClient {
 
     private GankClient() {
 
-        OkHttpClient mOkHttpClient = new OkHttpClient();
-//        mOkHttpClient.interceptors().add(new Interceptor() {
-//            @Override
-//            public Response intercept(Chain chain) throws IOException {
-//
-//                return null;
-//            }
-//        });
+        OkHttpClient.Builder builder = new OkHttpClient.Builder()
+                .connectTimeout(30_000, TimeUnit.MILLISECONDS)
+                .readTimeout(30_000, TimeUnit.SECONDS)
+                .writeTimeout(30_000, TimeUnit.SECONDS);
 
-        //Notice log必须加在最后
         if (BuildConfig.DEBUG) {
             HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
-            // set your desired log level
             logging.setLevel(HttpLoggingInterceptor.Level.BODY);
-            mOkHttpClient.interceptors().add(logging);
+            builder.addInterceptor(logging);
         }
 
-        Gson gson = new GsonBuilder()
+        final OkHttpClient mOkHttpClient = builder.build();
+
+        final Gson gson = new GsonBuilder()
                 .setDateFormat("yyyy-MM-dd")   //("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
                 .create();
 
-        Retrofit gank = new Retrofit.Builder().baseUrl(GankConfig.URL_DOMAIN)
+        final Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(GankConfig.URL_DOMAIN)
                 .addConverterFactory(GsonConverterFactory.create(gson))
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.createWithScheduler(Schedulers.newThread()))
+                .client(mOkHttpClient)
                 .build();
 
-        mGankApi = gank.create(GankApi.class);
+//        RxJavaPlugins.getInstance().registerObservableExecutionHook(new RxJavaObservableExecutionHook() {
+//            @Override
+//            public <T> Observable.OnSubscribe<T> onSubscribeStart(Observable<? extends T> observableInstance, Observable.OnSubscribe<T> onSubscribe) {
+//                //很遗憾 不能完全这么做
+//                observableInstance.subscribeOn(AndroidSchedulers.mainThread());
+//                return super.onSubscribeStart(observableInstance, onSubscribe);
+//            }
+//        });
+
+        mGankApi = retrofit.create(GankApi.class);
+
     }
 
-    public GankApi getGankApi() {
-        return mGankApi;
+    public  Observable<GAndroid> getAndroid(int page) {
+        return mGankApi.getAndroid(page);
     }
+
+    public Observable<GAndroid> getMeizi(int page){
+        return mGankApi.getMeizi(page);
+    }
+
+   public Observable<GankDaily> getDaily(int year,int month,int day){
+       return mGankApi.getDaily(year,month,day);
+   }
 
 }

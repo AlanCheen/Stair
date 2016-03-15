@@ -1,7 +1,7 @@
 package yfy.github.stair.api;
 
-import retrofit.http.GET;
-import retrofit.http.Path;
+import retrofit2.http.GET;
+import retrofit2.http.Path;
 import rx.Observable;
 import yfy.github.stair.data.GAndroid;
 import yfy.github.stair.data.GankDaily;
@@ -23,5 +23,4 @@ public interface GankApi {
 
     @GET("data/福利/"+GankConfig.PAGE_COUNT+"/{page}")
     Observable<GAndroid> getMeizi(@Path("page")int page);
-
 }
