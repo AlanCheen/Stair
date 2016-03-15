@@ -38,6 +38,16 @@ public class MainActivity extends ToolbarActivity implements NavigationView.OnNa
 
     protected static final String TAG = "MainActivity";
 
+    @IntDef({PAGE_GANK_ANDROID, PAGE_IMPORT_NEW, PAGE_GANK_DAILY, PAGE_GANK_MEIZI})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface Page {
+    }
+
+    public static final int PAGE_GANK_ANDROID = 1;
+    public static final int PAGE_IMPORT_NEW = 2;
+    public static final int PAGE_GANK_DAILY = 3;
+    public static final int PAGE_GANK_MEIZI = 4;
+
     @Bind(R.id.nav_view)
     NavigationView mNavView;
     @Bind(R.id.drawer_layout)
@@ -47,6 +57,8 @@ public class MainActivity extends ToolbarActivity implements NavigationView.OnNa
     private BaseFragment mImportNewFragment;
     private BaseFragment mGankDailyFragment;
     private BaseFragment mGankMeiziFragment;
+
+    @Page
     private int mCurrPage;
 
     public static Intent createIntent(Context context) {
@@ -86,15 +98,7 @@ public class MainActivity extends ToolbarActivity implements NavigationView.OnNa
         mTvBadge.setText("99+");
     }
 
-    @IntDef({PAGE_GANK_ANDROID, PAGE_IMPORT_NEW, PAGE_GANK_DAILY, PAGE_GANK_MEIZI})
-    @Retention(RetentionPolicy.SOURCE)
-    public @interface Page {
-    }
 
-    public static final int PAGE_GANK_ANDROID = 1;
-    public static final int PAGE_IMPORT_NEW = 2;
-    public static final int PAGE_GANK_DAILY = 3;
-    public static final int PAGE_GANK_MEIZI = 4;
 
     private void changePage(@Page int page) {
         if (mCurrPage == page) {
@@ -217,7 +221,7 @@ public class MainActivity extends ToolbarActivity implements NavigationView.OnNa
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
 
-        int pageDst = PAGE_GANK_ANDROID;
+        int pageDst = mCurrPage;
 
         int id = item.getItemId();
 
@@ -233,7 +237,17 @@ public class MainActivity extends ToolbarActivity implements NavigationView.OnNa
 
         } else if (id == R.id.setting) {
 
+        }else if(id==R.id.daynight) {
+
+//            if (getDelegate().applyDayNight()) {
+//                getDelegate().setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+//                getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+//            }else{
+//                getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+//            }
+            recreate();
         }
+
         changePage(pageDst);
 
         mDrawerLayout.closeDrawer(GravityCompat.START);

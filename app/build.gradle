@@ -82,18 +82,6 @@ dependencies {
     compile rootProject.ext.kenburnsview
     compile rootProject.ext.photoview
 
-//    compile "com.squareup.okhttp:okhttp:${okHttpVersion}"
-//    compile "com.squareup.okhttp:logging-interceptor:${okHttpVersion}"
-
-//    compile ("com.squareup.retrofit:retrofit:${retrofitVersion}"){
-//        exclude module: 'okhttp'
-//    }
-//    compile "com.squareup.retrofit:converter-gson:${retrofitVersion}"
-//    compile "com.squareup.retrofit:adapter-rxjava:${retrofitVersion}"
-
-//    compile "com.squareup.retrofit:converter-jackson:${retrofitVersion}"
-
-
     compile 'com.umeng.analytics:analytics:latest.integration'
 
     compile 'me.yifeiyuan.utils:utils:0.1.2'

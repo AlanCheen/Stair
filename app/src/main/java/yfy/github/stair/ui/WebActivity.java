@@ -4,6 +4,7 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -13,6 +14,7 @@ import android.widget.ProgressBar;
 
 import butterknife.Bind;
 import yfy.github.stair.R;
+import yfy.github.stair.utils.T;
 import yfy.github.stair.views.SmartWebView;
 
 public class WebActivity extends ToolbarActivity {
@@ -94,17 +96,31 @@ public class WebActivity extends ToolbarActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
         int id = item.getItemId();
         switch (id) {
+
             case R.id.open:
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                Uri uri = Uri.parse(mUrl);
+                i.setData(uri);
+                if (i.resolveActivity(getPackageManager()) != null) {
+                    startActivity(Intent.createChooser(i,"请皇上翻盘"));
+                }
                 break;
+
             case R.id.share:
+                T.show(mContext,"Coming soon");
                 break;
+
             case R.id.collect:
+                T.show(mContext,"Coming soon");
                 break;
+
             case R.id.copy_link:
                 ClipboardManager manager = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
                 manager.setPrimaryClip(ClipData.newPlainText("URL",mUrl));
+                T.show(mContext,"Url复制成功");
                 break;
         }
         return super.onOptionsItemSelected(item);

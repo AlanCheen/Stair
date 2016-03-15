@@ -41,6 +41,12 @@
                 android:icon="@android:drawable/ic_menu_send"
                 app:actionLayout="@layout/bage_textview"
                 android:title="News"/>
+
+            <item
+                android:id="@+id/daynight"
+                android:icon="@android:drawable/ic_menu_send"
+                app:actionLayout="@layout/bage_textview"
+                android:title="夜间模式"/>
         </menu>
     </item>
 
