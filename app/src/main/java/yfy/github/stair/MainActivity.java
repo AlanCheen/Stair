@@ -49,8 +49,7 @@ public class MainActivity extends ToolbarActivity implements NavigationView.OnNa
     private BaseFragment mGankMeiziFragment;
     private int mCurrPage;
 
-
-    public static Intent starter(Context context) {
+    public static Intent createIntent(Context context) {
         Intent intent = new Intent(context, MainActivity.class);
         return intent;
     }
