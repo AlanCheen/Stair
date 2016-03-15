@@ -1,5 +1,7 @@
 package yfy.github.stair.ui;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -46,7 +48,7 @@ public class WebActivity extends ToolbarActivity {
 
                 if (newProgress == 100) {
                     mProgressBar.setVisibility(View.GONE);
-                }else{
+                } else {
                     mProgressBar.setProgress(newProgress);
                     mProgressBar.setVisibility(View.VISIBLE);
                 }
@@ -73,7 +75,7 @@ public class WebActivity extends ToolbarActivity {
     public void onBackPressed() {
         if (mWebview.canGoBack()) {
             mWebview.goBack();
-        }else{
+        } else {
             super.onBackPressed();
         }
     }
@@ -94,9 +96,16 @@ public class WebActivity extends ToolbarActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         switch (id) {
+            case R.id.open:
+                break;
             case R.id.share:
                 break;
-
+            case R.id.collect:
+                break;
+            case R.id.copy_link:
+                ClipboardManager manager = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+                manager.setPrimaryClip(ClipData.newPlainText("URL",mUrl));
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
