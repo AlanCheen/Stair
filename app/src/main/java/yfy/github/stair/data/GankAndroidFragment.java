@@ -3,11 +3,12 @@ package yfy.github.stair.data;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +23,7 @@ import yfy.github.stair.adapters.GankAdapter;
 import yfy.github.stair.api.GankClient;
 import yfy.github.stair.ui.BaseFragment;
 import yfy.github.stair.ui.WebActivity;
+import yfy.github.stair.utils.Log;
 
 /**
  * Stair github:  https://github.com/AlanCheen/Stair
@@ -36,6 +38,8 @@ public class GankAndroidFragment extends BaseFragment {
     RecyclerView mRecyclerView;
     @Bind(R.id.refresh_layout)
     SwipeRefreshLayout mRefreshLayout;
+    @Bind(R.id.fab)
+    FloatingActionButton mFab;
 
     private GankAdapter mAdapter;
 
@@ -67,34 +71,34 @@ public class GankAndroidFragment extends BaseFragment {
         mAdapter = new GankAdapter(mActivity, mDatas);
 
         setupRv();
-
         requestData();
     }
 
     private void requestData() {
-        Observable<GAndroid> android = GankClient.getIns().getGankApi().getAndroid(mCurrPage);
-        android.subscribeOn(Schedulers.newThread())
+        mRefreshLayout.setRefreshing(true);
+        Observable<GAndroid> android = GankClient.getIns().getAndroid(mCurrPage);
+        android
+                .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<GAndroid>() {
                     @Override
                     public void onCompleted() {
                         Log.d(TAG, "onCompleted: ");
                         mRefreshLayout.setRefreshing(false);
-
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.d(TAG, "onError() called with: " + "e = [" + e + "]");
+                        Log.e(TAG, "onError() called with: " + "e = [" + e + "]", e);
                         mRefreshLayout.setRefreshing(false);
-
+                        Snackbar.make(mFab, "onError:" + e.getMessage(), Snackbar.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onNext(GAndroid gAndroid) {
                         List<GankEntity> entities = gAndroid.results;
 
-                        canLoadmore = entities.size()>=0;
+                        canLoadmore = entities.size() >= 0;
 
                         if (mCurrPage == 1) {
                             mDatas.clear();
@@ -110,6 +114,8 @@ public class GankAndroidFragment extends BaseFragment {
     private void setupRv() {
 
         mRefreshLayout = (SwipeRefreshLayout) mRootView.findViewById(R.id.refresh_layout);
+        mRefreshLayout.setColorSchemeColors(R.color.colorPrimary, R.color.colorAccent);
+
         mRefreshLayout.setOnRefreshListener(() -> {
             mCurrPage = 1;
             requestData();
@@ -126,7 +132,7 @@ public class GankAndroidFragment extends BaseFragment {
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    if (canLoadmore&&!mRefreshLayout.isRefreshing() && layoutManager.findLastCompletelyVisibleItemPosition() == mDatas.size() - 1) {
+                    if (canLoadmore && !mRefreshLayout.isRefreshing() && layoutManager.findLastCompletelyVisibleItemPosition() == mDatas.size() - 1) {
                         mRefreshLayout.setRefreshing(true);
                         mCurrPage++;
                         requestData();

@@ -72,7 +72,7 @@ public class MeiziFragment extends BaseFragment {
     }
 
     private void requestData() {
-        Observable<GAndroid> android = GankClient.getIns().getGankApi().getMeizi(mCurrPage);
+        Observable<GAndroid> android = GankClient.getIns().getMeizi(mCurrPage);
         android.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<GAndroid>() {

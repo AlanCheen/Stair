@@ -103,7 +103,7 @@ public class GankDailyFragment extends BaseFragment {
     }
     //// TODO: 15/11/24 处理年月日数据
     private void requestData() {
-        Observable<GankDaily> daily = GankClient.getIns().getGankApi().getDaily(2015, 11, 20);
+        Observable<GankDaily> daily = GankClient.getIns().getDaily(2015, 11, 20);
         daily.subscribeOn(Schedulers.newThread())
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(new Subscriber<GankDaily>() {

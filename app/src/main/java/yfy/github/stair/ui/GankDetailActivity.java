@@ -106,8 +106,7 @@ public class GankDetailActivity extends ToolbarActivity {
             int month = calendar.get(Calendar.MONTH) + 1;
             int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-
-            Observable<GankDaily> daily = GankClient.getIns().getGankApi().getDaily(year, month, day);
+            Observable<GankDaily> daily = GankClient.getIns().getDaily(year, month, day);
             Log.d(TAG, "requestData: daily" + daily);
             daily
                     .subscribeOn(Schedulers.newThread())
