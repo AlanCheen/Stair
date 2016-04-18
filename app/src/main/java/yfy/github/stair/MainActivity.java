@@ -245,7 +245,7 @@ public class MainActivity extends ToolbarActivity implements NavigationView.OnNa
 //            }else{
 //                getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
 //            }
-            recreate();
+//            recreate();
         }
 
         changePage(pageDst);
