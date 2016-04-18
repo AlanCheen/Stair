@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import yfy.github.stair.R;
+import yfy.github.stair.base.BaseActivity;
 
 /**
  * 有toolbar的 统一继承这个activity

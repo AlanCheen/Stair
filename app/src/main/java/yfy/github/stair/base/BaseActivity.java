@@ -1,4 +1,4 @@
-package yfy.github.stair.ui;
+package yfy.github.stair.base;
 
 import android.content.Context;
 import android.os.Bundle;

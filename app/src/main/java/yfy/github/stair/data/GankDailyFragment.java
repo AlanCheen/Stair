@@ -18,7 +18,7 @@ import rx.schedulers.Schedulers;
 import yfy.github.stair.R;
 import yfy.github.stair.adapters.GankDailyAdapter;
 import yfy.github.stair.api.GankClient;
-import yfy.github.stair.ui.BaseFragment;
+import yfy.github.stair.base.BaseFragment;
 
 /**
  * A simple {@link Fragment} subclass.

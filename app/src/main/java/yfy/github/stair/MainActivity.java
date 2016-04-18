@@ -25,7 +25,7 @@ import yfy.github.stair.data.GankAndroidFragment;
 import yfy.github.stair.data.GankDailyFragment;
 import yfy.github.stair.data.ImportNewFragment;
 import yfy.github.stair.data.MeiziFragment;
-import yfy.github.stair.ui.BaseFragment;
+import yfy.github.stair.base.BaseFragment;
 import yfy.github.stair.ui.ToolbarActivity;
 
 

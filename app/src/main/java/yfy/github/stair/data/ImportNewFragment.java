@@ -3,7 +3,7 @@ package yfy.github.stair.data;
 import android.os.Bundle;
 
 import yfy.github.stair.R;
-import yfy.github.stair.ui.BaseFragment;
+import yfy.github.stair.base.BaseFragment;
 
 /**
  * Stair github:  https://github.com/AlanCheen/Stair

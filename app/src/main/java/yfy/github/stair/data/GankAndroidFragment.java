@@ -21,7 +21,7 @@ import rx.schedulers.Schedulers;
 import yfy.github.stair.R;
 import yfy.github.stair.adapters.GankAdapter;
 import yfy.github.stair.api.GankClient;
-import yfy.github.stair.ui.BaseFragment;
+import yfy.github.stair.base.BaseFragment;
 import yfy.github.stair.ui.WebActivity;
 import yfy.github.stair.utils.Log;
 

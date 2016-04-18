@@ -2,6 +2,7 @@ package yfy.github.stair.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,7 +41,9 @@ public class GankAdapter extends RecyclerView.Adapter<GankAdapter.GankViewHolder
     public void onBindViewHolder(GankViewHolder holder, int position) {
 
         GankEntity entity = mDatas.get(position);
-        holder.tvContent.setText(entity.desc.concat(" from ").concat(entity.who));
+        if (!TextUtils.isEmpty(entity.desc)&&!TextUtils.isEmpty(entity.who)) {
+            holder.tvContent.setText(entity.desc.concat(" from ").concat(entity.who));
+        }
 
         holder.itemView.setOnClickListener(v-> {
             if (null != mOnItemClickListener) {

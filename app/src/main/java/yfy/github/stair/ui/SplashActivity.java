@@ -3,6 +3,7 @@ package yfy.github.stair.ui;
 import android.os.Bundle;
 
 import yfy.github.stair.MainActivity;
+import yfy.github.stair.base.BaseActivity;
 
 public class SplashActivity extends BaseActivity {
 

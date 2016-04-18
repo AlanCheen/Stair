@@ -17,7 +17,7 @@
             android:name=".MainActivity"
             android:label="@string/app_name">
         </activity>
-        <activity android:name=".ui.BaseActivity"/>
+        <activity android:name=".base.BaseActivity"/>
         <activity android:name=".ui.ToolbarActivity"/>
         <activity
             android:name=".ui.GankDetailActivity"
