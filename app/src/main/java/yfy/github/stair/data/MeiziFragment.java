@@ -24,7 +24,7 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import yfy.github.stair.R;
 import yfy.github.stair.adapters.GankMeiziAdapter;
-import yfy.github.stair.api.GankClient;
+import yfy.github.stair.api.Api;
 import yfy.github.stair.base.BaseFragment;
 import yfy.github.stair.ui.GankDetailActivity;
 
@@ -72,7 +72,7 @@ public class MeiziFragment extends BaseFragment {
     }
 
     private void requestData() {
-        Observable<GAndroid> android = GankClient.getIns().getMeizi(mCurrPage);
+        Observable<GAndroid> android = Api.getIns().getMeizi(mCurrPage);
         android.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<GAndroid>() {

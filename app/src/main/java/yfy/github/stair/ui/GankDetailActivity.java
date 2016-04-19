@@ -27,7 +27,7 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import yfy.github.stair.R;
-import yfy.github.stair.api.GankClient;
+import yfy.github.stair.api.Api;
 import yfy.github.stair.data.GankDaily;
 import yfy.github.stair.data.GankEntity;
 import yfy.github.stair.utils.TransitionListenerAdapter;
@@ -106,7 +106,7 @@ public class GankDetailActivity extends ToolbarActivity {
             int month = calendar.get(Calendar.MONTH) + 1;
             int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-            Observable<GankDaily> daily = GankClient.getIns().getDaily(year, month, day);
+            Observable<GankDaily> daily = Api.getIns().getDaily(year, month, day);
             Log.d(TAG, "requestData: daily" + daily);
             daily
                     .subscribeOn(Schedulers.newThread())

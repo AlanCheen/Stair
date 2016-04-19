@@ -5,6 +5,6 @@ package yfy.github.stair.base;
  */
 public interface BaseView<T> {
 
-    void attach(T t);
-    void detach();
+//    void attach(T t);
+//    void detach();
 }

@@ -21,7 +21,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 import butterknife.Bind;
-import yfy.github.stair.data.GankAndroidFragment;
+import yfy.github.stair.andgank.AndGankFrag;
 import yfy.github.stair.data.GankDailyFragment;
 import yfy.github.stair.data.ImportNewFragment;
 import yfy.github.stair.data.MeiziFragment;
@@ -112,8 +112,8 @@ public class MainActivity extends ToolbarActivity implements NavigationView.OnNa
         switch (page) {
             case PAGE_GANK_ANDROID:
                 if (null == mGankAndroidFragment) {
-                    mGankAndroidFragment = GankAndroidFragment.newInstance();
-                    ts.add(R.id.main_container, mGankAndroidFragment, GankAndroidFragment.TAG);
+                    mGankAndroidFragment = AndGankFrag.newInstance();
+                    ts.add(R.id.main_container, mGankAndroidFragment, AndGankFrag.TAG);
                 } else {
                     ts.show(mGankAndroidFragment);
                 }
@@ -121,7 +121,7 @@ public class MainActivity extends ToolbarActivity implements NavigationView.OnNa
             case PAGE_IMPORT_NEW:
                 if (null == mImportNewFragment) {
                     mImportNewFragment = ImportNewFragment.newInstance();
-                    ts.add(R.id.main_container, mImportNewFragment, GankAndroidFragment.TAG);
+                    ts.add(R.id.main_container, mImportNewFragment, AndGankFrag.TAG);
                 } else {
                     ts.show(mImportNewFragment);
                 }
@@ -129,7 +129,7 @@ public class MainActivity extends ToolbarActivity implements NavigationView.OnNa
             case PAGE_GANK_DAILY:
                 if (null == mGankDailyFragment) {
                     mGankDailyFragment = GankDailyFragment.newInstance();
-                    ts.add(R.id.main_container, mGankDailyFragment, GankAndroidFragment.TAG);
+                    ts.add(R.id.main_container, mGankDailyFragment, AndGankFrag.TAG);
                 } else {
                     ts.show(mGankDailyFragment);
                 }
@@ -137,7 +137,7 @@ public class MainActivity extends ToolbarActivity implements NavigationView.OnNa
             case PAGE_GANK_MEIZI:
                 if (null == mGankMeiziFragment) {
                     mGankMeiziFragment = MeiziFragment.newInstance();
-                    ts.add(R.id.main_container, mGankMeiziFragment, GankAndroidFragment.TAG);
+                    ts.add(R.id.main_container, mGankMeiziFragment, AndGankFrag.TAG);
                 } else {
                     ts.show(mGankMeiziFragment);
                 }
@@ -175,13 +175,7 @@ public class MainActivity extends ToolbarActivity implements NavigationView.OnNa
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-    }
-
-    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
 
         Log.d(TAG, "onCreateOptionsMenu() called with: " + "menu = [" + menu + "]");
         getMenuInflater().inflate(R.menu.main, menu);

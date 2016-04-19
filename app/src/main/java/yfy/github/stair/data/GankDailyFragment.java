@@ -17,7 +17,7 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import yfy.github.stair.R;
 import yfy.github.stair.adapters.GankDailyAdapter;
-import yfy.github.stair.api.GankClient;
+import yfy.github.stair.api.Api;
 import yfy.github.stair.base.BaseFragment;
 
 /**
@@ -103,7 +103,7 @@ public class GankDailyFragment extends BaseFragment {
     }
     //// TODO: 15/11/24 处理年月日数据
     private void requestData() {
-        Observable<GankDaily> daily = GankClient.getIns().getDaily(2015, 11, 20);
+        Observable<GankDaily> daily = Api.getIns().getDaily(2015, 11, 20);
         daily.subscribeOn(Schedulers.newThread())
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(new Subscriber<GankDaily>() {

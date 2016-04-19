@@ -21,24 +21,24 @@ import yfy.github.stair.data.GankDaily;
  * Created by 程序亦非猿 (http://weibo.com/alancheeen)
  * on 15/10/8
  */
-public class GankClient {
+public class Api {
 
-    private volatile static GankClient sGankClient;
+    private volatile static Api sApi;
 
-    public static GankClient getIns() {
-        if (sGankClient == null) {
-            synchronized (GankClient.class) {
-                if (null == sGankClient) {
-                    sGankClient = new GankClient();
+    public static Api getIns() {
+        if (sApi == null) {
+            synchronized (Api.class) {
+                if (null == sApi) {
+                    sApi = new Api();
                 }
             }
         }
-        return sGankClient;
+        return sApi;
     }
 
     private final GankApi mGankApi;
 
-    private GankClient() {
+    private Api() {
 
         OkHttpClient.Builder builder = new OkHttpClient.Builder()
                 .connectTimeout(30_000, TimeUnit.MILLISECONDS)
