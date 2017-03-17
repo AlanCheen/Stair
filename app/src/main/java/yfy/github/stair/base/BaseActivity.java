@@ -34,7 +34,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         int layoutId = provideLayoutId();
         if (layoutId > 0) {
-            setContentView(provideLayoutId());
+            setContentView(layoutId);
             ButterKnife.bind(this);
         }
         mContext = this;
